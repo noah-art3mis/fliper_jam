@@ -1,49 +1,32 @@
 # flip sim
 
 menu
-    entrar
-    sair
+entrar
+sair
 intro
 
 fase 1
-    1 - priming
-    animacao
-        emojis
-    2 - to perdendo e agora
-        menu escolher sugestao
-    animacao emojis
-    ganhar ou perder
-        ganar
+1 - priming
+animacao
+emojis
+2 - to perdendo e agora
+menu escolher sugestao
+animacao emojis
+ganhar ou perder
+ganar
 
 fase 2
 fase 3
 creditos
 
 sistemas
-    combate
+combate
 
 dados
-    infos inimigo
-    opcoes menu
+infos inimigo
+opcoes menu
 
-STATES
-    IDLE
-        animacao de fundo
-        aperte qualquer botao para iniciar
-    INTRO
-        explica alguma coisa. sei la. animacoes e passa pro combate
-    BATTLE
-        let. them. fight!
-        passa a animação. emojis e etc
-        quando vc aperta um botao ele grita algo, mas isso n afeta gameplay
-    CHOOSE
-        animação
-            ele fez x. o que voce acha que eu deveria fazer?
-            3 opções:
-    BATTLE
-        animação. no fim, ele ganha ou perde.
-            se perder vai pro LOSE, depois volta pro IDLE
-            se ganhar vai pro WIN
-    WIN
-        ?
-
+https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
+https://gdscript.com/solutions/godot-state-machine/
+https://docs.godotengine.org/en/3.2/tutorials/misc/state_design_pattern.html
+https://docs.godotengine.org/en/stable/classes/class_array.html
