@@ -7,20 +7,18 @@ onready var optionThree = $NinePatchRect4/C
 
 onready var options = [0, 1, 2, 3]
 
-func _process(delta):
-	if StateManager.state == StateManager.States.CHOICE:
-		visible = true
-	else:
-		visible = false
-
-func toggle_option_visibility():
-	if visible:
-		visible = false
-	else:
-		visible = true
+onready var good_option = options[1]
+onready var medium_option = options[2]
+onready var bad_option = options[3]
 
 func set_options():
 	question.text = options[0]
 	optionOne.text = options[1]
 	optionTwo.text = options[2]
 	optionThree.text = options[3]
+
+func toggle_option_visibility():
+	if visible:
+		visible = false
+	else:
+		visible = true

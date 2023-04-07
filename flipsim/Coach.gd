@@ -1,15 +1,20 @@
 extends Node2D
 
+onready var bubble = $SpeechBubble
 onready var text = $SpeechBubble/Text
 onready var encouragements = ["bora la", "porra", "etc"]
 onready var timeout = $EmojiTimeout
 onready var emojis = []
+onready var timer = $BubbleTimeout
 
 func _ready():
 	randomize()
 	
 func say_random_encouragement():
+	bubble.visible = true
+	timer.start(2)
 	text.text = encouragements[randi() % encouragements.size()]
+	
 
 func say_emoji(param):
 	if timeout.get_wait_time() > 0:
@@ -36,3 +41,7 @@ func say_emoji(param):
 	var random_number = rand_range(0.8, 1.2)
 	timeout.set_wait_time(random_number)
 	timeout.start()
+
+
+func _on_BubbleTimeout_timeout():
+	bubble.visible = false
