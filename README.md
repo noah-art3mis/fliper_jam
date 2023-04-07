@@ -4,20 +4,13 @@
 
 ### emoji
 
-
-
-- perguntar sobre resolucao
-256 x 224  
-512 x 448
-
-- perguntar sobre controles
-ui_accept - A?  
-ui_select - B?  
-ui_cancel - C?  
+## Pitch
+as dificuldades
+caracteristicas (engine etc)
 
 ## TODO
-ver negocio dos emojis
-testar flow
+bug?
+inserir dados emojis
 colocar ui direito
 
 ### audio
@@ -33,19 +26,12 @@ colocar ui direito
 
 ### visual
 
-- cenario
-- jogador 1 e 2
-- logo
-- caixas p opcoes ui?
-- bolha de fala ui?
-
-### narrativa
-
-- encouragements
-- dialogos
-- escolher emojis
-
-### sistemas
+- jogador 1
+- animacao
+- jogdor 2
+- animacao
+- tela
+- animacao
 
 ### test and polish
 tune random timeout emoji coach

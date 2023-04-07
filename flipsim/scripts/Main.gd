@@ -3,12 +3,7 @@ extends Node
 var BATTLE_WAIT_TIME = 10
 var END_TIME = 5
 
-
-onready var coachSpeech = $UI/DialogueOptions/Pergunta/CoachSpeech
-onready var dialogue_options = $zIndexWrapper2/DialogueOptions
-onready var optionOne = $UI/DialogueOptions/A
-onready var optionTwo = $UI/DialogueOptions/B
-onready var optionThree = $UI/DialogueOptions/C
+onready var dialogue_options = $OptionsLeft
 onready var playerOne = $PlayerOne
 onready var playerTwo = $PlayerTwo
 onready var pressToPlay = $UI/PressToPlay
@@ -44,7 +39,7 @@ func _input(event):
 		
 #input
 func _ready():
-	StateManager.state == StateManager.States.IDLE:
+	StateManager.state == StateManager.States.IDLE
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
@@ -124,12 +119,24 @@ func play_choice():
 
 #TODO MECHANICS
 func choose(choice):
-	if choice == dialogue_options.good_option:
-		points += 100
-	if choice == dialogue_options.medium_option:
-		points += 50
-	if choice == dialogue_options.bad_option:
-		points += 10
+	var _emoji
+	
+	match choice:
+		"A":
+			_emoji = dialogue_options.a1
+		"B":
+			_emoji = dialogue_options.b1
+		"C":
+			_emoji = dialogue_options.c1
+	
+	match _emoji:
+		dialogue_options.good_option:
+			points += 100
+		dialogue_options.medium_option:
+			points += 50
+		dialogue_options.bad_option:
+			points += 10
+	
 	change_to_second_half()
 	play_battle()
 
