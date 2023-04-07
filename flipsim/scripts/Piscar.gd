@@ -8,7 +8,7 @@ func piscar():
 	else:
 		visible = true
 
-func _process(delta):
+func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
 		piscar()
 	else:

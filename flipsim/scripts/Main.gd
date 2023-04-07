@@ -43,27 +43,31 @@ func _input(event):
 		get_tree().quit()
 		
 #input
-func _process(delta):
+func _ready():
+	StateManager.state == StateManager.States.IDLE:
+
+func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
 		if Input.is_action_just_pressed("start"):
+			print("start")
 			play_battle()
 			audio_start.play()
 			
-	if StateManager.state == StateManager.States.BATTLE:
-		if Input.is_action_just_pressed("ui_accept"):
-			coach.say_emoji("A")
-		if Input.is_action_just_pressed("ui_select"):
-			coach.say_emoji("B")
-		if Input.is_action_just_pressed("ui_cancel"):
-			coach.say_emoji("C")
-		if Input.is_action_just_pressed("ui_up"):
-			coach.say_emoji("up")
-		if Input.is_action_just_pressed("ui_down"):
-			coach.say_emoji("down")
-		if Input.is_action_just_pressed("ui_left"):
-			coach.say_emoji("left")
-		if Input.is_action_just_pressed("ui_right"):
-			coach.say_emoji("right")
+#	if StateManager.state == StateManager.States.BATTLE:
+#		if Input.is_action_just_pressed("ui_accept"):
+#			coach.say_emoji("A")
+#		if Input.is_action_just_pressed("ui_select"):
+#			coach.say_emoji("B")
+#		if Input.is_action_just_pressed("ui_cancel"):
+#			coach.say_emoji("C")
+#		if Input.is_action_just_pressed("ui_up"):
+#			coach.say_emoji("up")
+#		if Input.is_action_just_pressed("ui_down"):
+#			coach.say_emoji("down")
+#		if Input.is_action_just_pressed("ui_left"):
+#			coach.say_emoji("left")
+#		if Input.is_action_just_pressed("ui_right"):
+#			coach.say_emoji("right")
 
 	if StateManager.state == StateManager.States.CHOICE:
 		if Input.is_action_just_pressed("A"):
@@ -78,7 +82,7 @@ func _process(delta):
 			
 			
 		
-	if StateManager.state == StateManager.States.WIN:
+	if StateManager.state == StateManager.States.END:
 		pass
 
 func play_battle():

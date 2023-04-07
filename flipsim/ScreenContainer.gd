@@ -9,7 +9,7 @@ func _ready():
 #	add_child(node)
 #	node.set_size_override(true, Vector2(WIDTH, HEIGHT)) # Custom size for 2D.
 	
-func _process(delta):
+func _process(_delta):
 	var img = get_viewport().get_texture().get_data()
 	img.flip_y()
 	var tex = ImageTexture.new()
