@@ -10,10 +10,23 @@ onready var playerTwo = $PlayerTwo
 onready var pressToPlay = $UI/PressToPlay
 onready var logo = $Logo
 onready var coach = $Coach
-onready var battle_timer = $BattleTimer
 onready var win_text = $UI/win
 onready var lose_text = $UI/lose
+
+#timers
+onready var battle_timer = $BattleTimer
 onready var end_timer = $EndTimer
+onready var fight_timer = $LetThemFightTimer
+
+#audio
+onready var audio_music = $AudioContainer/Music
+onready var audio_let_them_fight = $AudioContainer/Fight
+onready var audio_keyboard = $AudioContainer/Keyboard
+onready var audio_start = $AudioContainer/StartAudio
+onready var audio_interface_beep = $AudioContainer/Beep
+onready var audio_emoji = $AudioContainer/Emoji
+onready var audio_win = $AudioContainer/Win
+onready var audio_lose = $AudioContainer/Lose
 
 var BATTLE_WAIT_TIME = 10
 var END_TIME = 5
@@ -27,6 +40,9 @@ func _input(event):
 		
 func print_emoji(target, emoji):
 	pass
+	
+func _ready():
+	audio_music.play()
 	
 func _process(delta):
 	if StateManager.state == StateManager.States.IDLE:
@@ -63,10 +79,13 @@ func _process(delta):
 func play_battle():
 	StateManager.state = StateManager.States.BATTLE
 	coach.say_random_encouragement()
+	let_them_fight()
 	playerOne.speak_randomly()
 	playerTwo.speak_randomly()
 	battle_timer.start(BATTLE_WAIT_TIME)
 
+func let_them_fight():
+	
 func _on_BattleTimer_timeout():
 	if first_half:
 		play_choice()

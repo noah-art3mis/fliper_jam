@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/visual/blue_panel.png" type="Texture" id=12]
 [ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
 [ext_resource path="res://assets/visual/square.png" type="Texture" id=14]
+[ext_resource path="res://addons/emojis-for-godot/nodes/EmojiIcon.gd" type="Script" id=15]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -73,8 +74,6 @@ theme = ExtResource( 5 )
 text = "flipilFLIPILFlipilf"
 align = 1
 valign = 1
-
-[node name="StartAudio" type="AudioStreamPlayer" parent="IdleUI"]
 
 [node name="zIndexWrapper2" type="Node2D" parent="."]
 z_index = 1
@@ -207,12 +206,6 @@ text = "VOCÊ PERDEU :("
 align = 1
 valign = 1
 
-[node name="MusicAudio" type="AudioStreamPlayer" parent="."]
-autoplay = true
-
-[node name="AmbientAudio" type="AudioStreamPlayer" parent="."]
-autoplay = true
-
 [node name="PlayerOne" type="AnimatedSprite" parent="."]
 script = ExtResource( 8 )
 
@@ -263,6 +256,32 @@ script = ExtResource( 13 )
 
 [node name="EndTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioContainer" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioContainer"]
+autoplay = true
+
+[node name="Fight" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Keyboard" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="EmojiIcon" type="TextureRect" parent="AudioContainer/Keyboard"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 15 )
+
+[node name="StartAudio" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Beep" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Emoji" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Win" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Lose" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="LetThemFightTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="Coach/BubbleTimeout" to="Coach" method="_on_BubbleTimeout_timeout"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
