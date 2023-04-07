@@ -24,7 +24,7 @@ margin_bottom = -40.0
 [node name="Pergunta" type="TextureRect" parent="UI/DialogueOptions"]
 margin_right = 12.0
 
-[node name="Label" type="Label" parent="UI/DialogueOptions/Pergunta"]
+[node name="CoachSpeech" type="Label" parent="UI/DialogueOptions/Pergunta"]
 margin_right = 40.0
 margin_bottom = 14.0
 
@@ -43,12 +43,20 @@ margin_top = 52.0
 margin_right = 12.0
 margin_bottom = 72.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/DialogueOptions"]
+
 [node name="entrar" type="Button" parent="UI"]
 margin_right = 12.0
 margin_bottom = 20.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/entrar"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Viewport" type="Viewport" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayerOne" type="AnimatedSprite" parent="."]
+
+[node name="PlayerTwo" type="AnimatedSprite" parent="."]

@@ -8,14 +8,54 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Emojis",
+"language": "GDScript",
+"path": "res://addons/emojis-for-godot/emojis/emojis.gd"
+} ]
+_global_script_class_icons={
+"Emojis": "res://addons/emojis-for-godot/icon.png"
+}
+
 [application]
 
 config/name="FlipSim"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/borderless=true
+window/size/always_on_top=true
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+A={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+B={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":66,"unicode":0,"echo":false,"script":null)
+ ]
+}
+C={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777241,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [physics]
 
