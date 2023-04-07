@@ -6,7 +6,7 @@ onready var encouragements = ["bora la", "porra", "etc"]
 onready var timeout = $EmojiTimeout
 onready var emojis = []
 onready var timer = $BubbleTimeout
-
+onready var options = $"../OptionsLeft"
 func _ready():
 	randomize()
 	

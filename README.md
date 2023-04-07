@@ -2,9 +2,9 @@
 
 ## Avisos
 
-- marcar orientação?
-- precisa de uma forma de mostrar q vc ganhou ou nao
-- o que acontece quando vc ganha?
+### emoji
+
+
 
 - perguntar sobre resolucao
 256 x 224  

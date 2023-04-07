@@ -1,14 +1,19 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
 [ext_resource path="res://assets/visual/mock.jpeg" type="Texture" id=3]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/main_theme_font.tres" type="Theme" id=5]
+[ext_resource path="res://addons/emojis-for-godot/nodes/EmojiIcon.gd" type="Script" id=6]
 [ext_resource path="res://DialogueOptions.gd" type="Script" id=7]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=8]
 [ext_resource path="res://Coach.gd" type="Script" id=9]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f480.tres" type="Texture" id=10]
+[ext_resource path="res://Options.gd" type="Script" id=11]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60e.tres" type="Texture" id=12]
 [ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
+[ext_resource path="res://addons/emojis-for-godot/nodes/ninebox.jpg" type="Texture" id=14]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -219,6 +224,13 @@ margin_top = 121.0
 margin_right = 152.0
 margin_bottom = 202.0
 
+[node name="EmojiIcon" type="TextureRect" parent="Coach"]
+margin_left = 61.0
+margin_top = 148.0
+margin_right = 101.0
+margin_bottom = 188.0
+script = ExtResource( 6 )
+
 [node name="AudioContainer" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="AudioContainer"]
@@ -244,15 +256,188 @@ script = ExtResource( 13 )
 
 [node name="Screen" type="AnimatedSprite" parent="."]
 
-[node name="Options" type="Control" parent="."]
+[node name="OptionsLeft" type="Control" parent="."]
 anchor_bottom = 1.0
+margin_right = 136.0
+script = ExtResource( 11 )
 
-[node name="Select" type="AudioStreamPlayer" parent="Options"]
+[node name="Select" type="AudioStreamPlayer" parent="OptionsLeft"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
-anchor_bottom = 1.0
+[node name="Question" type="HBoxContainer" parent="OptionsLeft"]
+margin_left = 28.0
+margin_top = 149.0
+margin_right = 144.0
+margin_bottom = 185.0
 
-[node name="A" type="NinePatchRect" parent="Options/VBoxContainer"]
+[node name="EmojiIcon" type="TextureRect" parent="OptionsLeft/Question"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture = ExtResource( 12 )
+script = ExtResource( 6 )
+
+[node name="EmojiIcon2" type="TextureRect" parent="OptionsLeft/Question"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 36.0
+texture = ExtResource( 12 )
+script = ExtResource( 6 )
+
+[node name="EmojiIcon3" type="TextureRect" parent="OptionsLeft/Question"]
+margin_left = 80.0
+margin_right = 116.0
+margin_bottom = 36.0
+texture = ExtResource( 12 )
+script = ExtResource( 6 )
+
+[node name="Answer" type="VBoxContainer" parent="OptionsLeft"]
+anchor_top = 0.475
+anchor_bottom = 0.801
+margin_left = 7.0
+margin_top = 6.19998
+margin_right = 136.0
+margin_bottom = -5.84802
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="A" type="NinePatchRect" parent="OptionsLeft/Answer"]
+margin_right = 129.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 9, 9 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsLeft/Answer/A"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -18.0
+margin_right = 58.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="A1" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A3" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
+margin_left = 80.0
+margin_right = 116.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A2" type="NinePatchRect" parent="OptionsLeft/Answer"]
+margin_top = 46.0
+margin_right = 129.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 9, 9 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsLeft/Answer/A2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -18.0
+margin_right = 58.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="A1" type="TextureRect" parent="OptionsLeft/Answer/A2/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A2/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A3" type="TextureRect" parent="OptionsLeft/Answer/A2/HBoxContainer"]
+margin_left = 80.0
+margin_right = 116.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A3" type="NinePatchRect" parent="OptionsLeft/Answer"]
+margin_top = 92.0
+margin_right = 129.0
+margin_bottom = 134.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 9, 9 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsLeft/Answer/A3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -18.0
+margin_right = 58.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="A1" type="TextureRect" parent="OptionsLeft/Answer/A3/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A3/HBoxContainer"]
+margin_left = 40.0
+margin_right = 76.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
+
+[node name="A3" type="TextureRect" parent="OptionsLeft/Answer/A3/HBoxContainer"]
+margin_left = 80.0
+margin_right = 116.0
+margin_bottom = 36.0
+texture = ExtResource( 10 )
+script = ExtResource( 6 )
+emoji_name = "skull"
 
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
