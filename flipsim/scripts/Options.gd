@@ -13,6 +13,8 @@ onready var good_option = cheat_sheet[0]
 onready var medium_option = cheat_sheet[1]
 onready var bad_option = cheat_sheet[2]
 
+onready var p1 = $Combat/P1
+
 onready var q1 = $Question/Q1
 onready var q2 = $Question/Q2
 onready var q3 = $Question/Q3

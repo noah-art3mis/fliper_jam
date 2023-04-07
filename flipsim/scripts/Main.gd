@@ -22,7 +22,9 @@ onready var fight_timer = $LetThemFightTimer
 
 #audio
 onready var audio_music = $AudioContainer/Music
-onready var audio_let_them_fight = $AudioContainer/Fight
+onready var audio_let = $AudioContainer/Let
+onready var audio_them = $AudioContainer/Them
+onready var audio_fight = $AudioContainer/Fight
 onready var audio_start = $AudioContainer/StartAudio
 onready var audio_interface_beep = $AudioContainer/Beep
 onready var audio_emoji = $AudioContainer/Emoji
@@ -75,35 +77,33 @@ func _process(_delta):
 			audio_interface_beep.play()
 			choose("C")
 			
-			
-		
 	if StateManager.state == StateManager.States.END:
 		pass
 
 func play_battle():
 	StateManager.state = StateManager.States.BATTLE
 	print("enter battle state")
-	coach.say_random_encouragement()
 	let_them_fight()
 
 func let_them_fight():
 	fight_timer.start(3)
 	if fight_timer.get_time_left() < 3:
 		let.visible = true
+#		audio_let.play()
 	if fight_timer.get_time_left() < 2:
 		them.visible = true
+#		audio_them.play()
 	if fight_timer.get_time_left() < 1:
 		fight.visible = true
-	audio_let_them_fight.play()
-	
+#		audio_fight.play()
+		
 func _on_LetThemFightTimer_timeout():
 	let.visible = false
 	them.visible = false
 	fight.visible = false
 	battle_timer.start(BATTLE_WAIT_TIME)
-	playerOne.speak_randomly()
-	playerTwo.speak_randomly()
-
+	playerOne.speak()
+	playerTwo.speak()
 	
 func _on_BattleTimer_timeout():
 	if first_half:

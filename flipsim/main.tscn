@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -6,13 +6,17 @@
 [ext_resource path="res://scripts/UI.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/main_theme_font.tres" type="Theme" id=5]
 [ext_resource path="res://addons/emojis-for-godot/nodes/EmojiIcon.gd" type="Script" id=6]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f600.tres" type="Texture" id=7]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=8]
-[ext_resource path="res://Coach.gd" type="Script" id=9]
+[ext_resource path="res://scripts/Coach.gd" type="Script" id=9]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f480.tres" type="Texture" id=10]
-[ext_resource path="res://Options.gd" type="Script" id=11]
+[ext_resource path="res://scripts/Options.gd" type="Script" id=11]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60e.tres" type="Texture" id=12]
 [ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
 [ext_resource path="res://addons/emojis-for-godot/nodes/ninebox.jpg" type="Texture" id=14]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1eb.tres" type="Texture" id=15]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60b.tres" type="Texture" id=16]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f8.tres" type="Texture" id=17]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -158,6 +162,9 @@ script = ExtResource( 8 )
 [node name="Emoji" type="AudioStreamPlayer" parent="PlayerOne"]
 
 [node name="SpeakTimer" type="Timer" parent="PlayerOne"]
+wait_time = 3.0
+
+[node name="FadeOutTimer" type="Timer" parent="PlayerOne"]
 
 [node name="PlayerTwo" type="AnimatedSprite" parent="."]
 script = ExtResource( 8 )
@@ -198,6 +205,10 @@ one_shot = true
 [node name="Music" type="AudioStreamPlayer" parent="AudioContainer"]
 autoplay = true
 
+[node name="Let" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Them" type="AudioStreamPlayer" parent="AudioContainer"]
+
 [node name="Fight" type="AudioStreamPlayer" parent="AudioContainer"]
 
 [node name="StartAudio" type="AudioStreamPlayer" parent="AudioContainer"]
@@ -236,20 +247,23 @@ margin_right = 36.0
 margin_bottom = 36.0
 texture = ExtResource( 12 )
 script = ExtResource( 6 )
+emoji_name = "2714"
 
 [node name="Q2" type="TextureRect" parent="OptionsLeft/Question"]
 margin_left = 40.0
 margin_right = 76.0
 margin_bottom = 36.0
-texture = ExtResource( 12 )
+texture = ExtResource( 7 )
 script = ExtResource( 6 )
+emoji_name = "grinning face with smiling eyes"
 
 [node name="Q3" type="TextureRect" parent="OptionsLeft/Question"]
 margin_left = 80.0
 margin_right = 116.0
 margin_bottom = 36.0
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 script = ExtResource( 6 )
+emoji_name = "1f0cf"
 
 [node name="Sprite" type="Sprite" parent="OptionsLeft/Question"]
 
@@ -257,19 +271,19 @@ script = ExtResource( 6 )
 anchor_top = 0.475
 anchor_bottom = 0.801
 margin_left = 7.0
-margin_top = 6.19998
+margin_top = -14.8
 margin_right = 136.0
-margin_bottom = -5.84802
+margin_bottom = -5.84799
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="A" type="NinePatchRect" parent="OptionsLeft/Answer"]
 margin_right = 129.0
-margin_bottom = 41.0
+margin_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
+region_rect = Rect2( 1, 1, 7, 7 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -289,34 +303,34 @@ size_flags_horizontal = 3
 [node name="A1" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_right = 36.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 17 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "shushing face"
 
 [node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_left = 40.0
 margin_right = 76.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 16 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "yum"
 
 [node name="A3" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_left = 80.0
 margin_right = 116.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 17 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "shushing face"
 
 [node name="B" type="NinePatchRect" parent="OptionsLeft/Answer"]
-margin_top = 45.0
+margin_top = 53.0
 margin_right = 129.0
-margin_bottom = 87.0
+margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
+region_rect = Rect2( 1, 1, 7, 7 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -357,13 +371,13 @@ script = ExtResource( 6 )
 emoji_name = "skull"
 
 [node name="C" type="NinePatchRect" parent="OptionsLeft/Answer"]
-margin_top = 91.0
+margin_top = 106.0
 margin_right = 129.0
-margin_bottom = 133.0
+margin_bottom = 155.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
+region_rect = Rect2( 1, 1, 7, 7 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -403,195 +417,21 @@ texture = ExtResource( 10 )
 script = ExtResource( 6 )
 emoji_name = "skull"
 
-[node name="OptionsRight" type="Control" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 11 )
+[node name="Combat" type="Control" parent="OptionsLeft"]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="Select" type="AudioStreamPlayer" parent="OptionsRight"]
-
-[node name="Question" type="HBoxContainer" parent="OptionsRight"]
-margin_left = 28.0
-margin_top = 149.0
-margin_right = 144.0
-margin_bottom = 185.0
-
-[node name="Q1" type="TextureRect" parent="OptionsRight/Question"]
-margin_right = 36.0
-margin_bottom = 36.0
-texture = ExtResource( 12 )
+[node name="P1" type="TextureRect" parent="OptionsLeft/Combat"]
+margin_right = 40.0
+margin_bottom = 40.0
 script = ExtResource( 6 )
-
-[node name="Q2" type="TextureRect" parent="OptionsRight/Question"]
-margin_left = 40.0
-margin_right = 76.0
-margin_bottom = 36.0
-texture = ExtResource( 12 )
-script = ExtResource( 6 )
-
-[node name="Q3" type="TextureRect" parent="OptionsRight/Question"]
-margin_left = 80.0
-margin_right = 116.0
-margin_bottom = 36.0
-texture = ExtResource( 12 )
-script = ExtResource( 6 )
-
-[node name="Answer" type="VBoxContainer" parent="OptionsRight"]
-anchor_top = 0.475
-anchor_bottom = 0.801
-margin_left = 7.0
-margin_top = 6.19998
-margin_right = 136.0
-margin_bottom = -5.84802
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="A" type="NinePatchRect" parent="OptionsRight/Answer"]
-margin_right = 129.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsRight/Answer/A"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -58.0
-margin_top = -18.0
-margin_right = 58.0
-margin_bottom = 18.0
-size_flags_horizontal = 3
-
-[node name="A1" type="TextureRect" parent="OptionsRight/Answer/A/HBoxContainer"]
-margin_right = 36.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="A2" type="TextureRect" parent="OptionsRight/Answer/A/HBoxContainer"]
-margin_left = 40.0
-margin_right = 76.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="A3" type="TextureRect" parent="OptionsRight/Answer/A/HBoxContainer"]
-margin_left = 80.0
-margin_right = 116.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="B" type="NinePatchRect" parent="OptionsRight/Answer"]
-margin_top = 45.0
-margin_right = 129.0
-margin_bottom = 87.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsRight/Answer/B"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -58.0
-margin_top = -18.0
-margin_right = 58.0
-margin_bottom = 18.0
-size_flags_horizontal = 3
-
-[node name="B1" type="TextureRect" parent="OptionsRight/Answer/B/HBoxContainer"]
-margin_right = 36.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="B2" type="TextureRect" parent="OptionsRight/Answer/B/HBoxContainer"]
-margin_left = 40.0
-margin_right = 76.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="B3" type="TextureRect" parent="OptionsRight/Answer/B/HBoxContainer"]
-margin_left = 80.0
-margin_right = 116.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="C" type="NinePatchRect" parent="OptionsRight/Answer"]
-margin_top = 91.0
-margin_right = 129.0
-margin_bottom = 133.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 0, 0, 9, 9 )
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsRight/Answer/C"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -58.0
-margin_top = -18.0
-margin_right = 58.0
-margin_bottom = 18.0
-size_flags_horizontal = 3
-
-[node name="C1" type="TextureRect" parent="OptionsRight/Answer/C/HBoxContainer"]
-margin_right = 36.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="C2" type="TextureRect" parent="OptionsRight/Answer/C/HBoxContainer"]
-margin_left = 40.0
-margin_right = 76.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
-
-[node name="C3" type="TextureRect" parent="OptionsRight/Answer/C/HBoxContainer"]
-margin_left = 80.0
-margin_right = 116.0
-margin_bottom = 36.0
-texture = ExtResource( 10 )
-script = ExtResource( 6 )
-emoji_name = "skull"
 
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
 [connection signal="timeout" from="LetThemFightTimer" to="." method="_on_LetThemFightTimer_timeout"]
 [connection signal="timeout" from="PlayerOne/Keyboard/KeyboardTimer" to="PlayerOne" method="_on_KeyboardTimer_timeout"]
 [connection signal="timeout" from="PlayerOne/SpeakTimer" to="PlayerOne" method="_on_SpeakTimer_timeout"]
+[connection signal="timeout" from="PlayerOne/FadeOutTimer" to="PlayerOne" method="_on_FadeOutTimer_timeout"]
 [connection signal="timeout" from="PlayerTwo/Keyboard/KeyboardTimer" to="PlayerTwo" method="_on_KeyboardTimer_timeout"]
 [connection signal="timeout" from="PlayerTwo/SpeakTimer" to="PlayerTwo" method="_on_SpeakTimer_timeout"]
 [connection signal="timeout" from="Coach/BubbleTimeout" to="Coach" method="_on_BubbleTimeout_timeout"]
