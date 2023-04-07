@@ -30,8 +30,8 @@ StateManager="*res://scripts/StateManager.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=480
+window/size/width=512
+window/size/height=448
 window/size/borderless=true
 window/size/always_on_top=true
 

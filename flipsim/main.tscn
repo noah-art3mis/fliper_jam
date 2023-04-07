@@ -1,46 +1,43 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
-[ext_resource path="res://assets/visual/dawg.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/visual/mock.jpeg" type="Texture" id=3]
 [ext_resource path="res://scripts/UI.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/main_theme_font.tres" type="Theme" id=5]
-[ext_resource path="res://scripts/Logo.gd" type="Script" id=6]
 [ext_resource path="res://DialogueOptions.gd" type="Script" id=7]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=8]
 [ext_resource path="res://Coach.gd" type="Script" id=9]
-[ext_resource path="res://assets/visual/ninesliced.png" type="Texture" id=10]
-[ext_resource path="res://assets/fonts/options_theme.tres" type="Theme" id=11]
-[ext_resource path="res://assets/visual/blue_panel.png" type="Texture" id=12]
 [ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
-[ext_resource path="res://assets/visual/square.png" type="Texture" id=14]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
 
-[node name="IdleUI" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="BattleTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
-[node name="zIndexWrapper" type="Node2D" parent="IdleUI"]
-position = Vector2( 350, 300 )
-z_index = 1
+[node name="EndTimer" type="Timer" parent="."]
+one_shot = true
 
-[node name="PressToPlay" type="Label" parent="IdleUI/zIndexWrapper"]
-anchor_left = 0.5
+[node name="LetThemFightTimer" type="Timer" parent="."]
+
+[node name="IdleLayer" type="CanvasLayer" parent="."]
+
+[node name="PressToPlay" type="Label" parent="IdleLayer"]
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -336.0
-margin_top = -16.0
-margin_right = 289.0
-margin_bottom = 53.0
+margin_top = 73.5
+margin_bottom = 178.5
 theme = ExtResource( 5 )
 text = "aperte
 start 
@@ -51,124 +48,47 @@ autowrap = true
 uppercase = true
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="IdleUI/zIndexWrapper/PressToPlay"]
+[node name="Timer" type="Timer" parent="IdleLayer/PressToPlay"]
 wait_time = 2.0
 autostart = true
 
-[node name="Logo" type="Sprite" parent="IdleUI"]
-position = Vector2( 300, 100 )
-z_index = 1
-script = ExtResource( 6 )
-
-[node name="Label" type="Label" parent="IdleUI/Logo"]
-anchor_left = 0.5
+[node name="Logo" type="Label" parent="IdleLayer"]
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -332.5
-margin_top = -32.5
-margin_right = 332.5
-margin_bottom = 32.5
+margin_top = -172.5
+margin_right = 10.0
+margin_bottom = -139.5
 theme = ExtResource( 5 )
-text = "flipilFLIPILFlipilf"
+text = "lutadores de rua"
 align = 1
 valign = 1
+uppercase = true
 
-[node name="zIndexWrapper2" type="Node2D" parent="."]
-z_index = 1
+[node name="DialogueLayer" type="CanvasLayer" parent="."]
 
-[node name="DialogueOptions" type="VBoxContainer" parent="zIndexWrapper2"]
-anchor_right = 1.0
+[node name="DialogueOptions" type="VBoxContainer" parent="DialogueLayer"]
 anchor_bottom = 1.0
+margin_top = 224.0
+margin_right = 150.0
+margin_bottom = 10.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 alignment = 1
 script = ExtResource( 7 )
 
-[node name="SelectOptionAudioStreamPlayer" type="AudioStreamPlayer" parent="zIndexWrapper2/DialogueOptions"]
+[node name="SelectOptionAudioStreamPlayer" type="AudioStreamPlayer" parent="DialogueLayer/DialogueOptions"]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="zIndexWrapper2/DialogueOptions"]
-margin_right = 180.0
-margin_bottom = 180.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 12 )
-region_rect = Rect2( 0, 0, 100, 100 )
-patch_margin_left = 90
-patch_margin_top = 90
-patch_margin_right = 90
-patch_margin_bottom = 90
-
-[node name="CoachSpeech" type="Label" parent="zIndexWrapper2/DialogueOptions/NinePatchRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 11 )
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting"
-valign = 1
-autowrap = true
-
-[node name="HSeparator" type="HSeparator" parent="zIndexWrapper2/DialogueOptions"]
-margin_top = 184.0
-margin_right = 180.0
-margin_bottom = 188.0
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="zIndexWrapper2/DialogueOptions"]
-margin_top = 192.0
-margin_right = 180.0
-margin_bottom = 342.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 10 )
+[node name="AnswerA" type="NinePatchRect" parent="DialogueLayer/DialogueOptions"]
+margin_top = 42.0
+margin_right = 150.0
+margin_bottom = 192.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 patch_margin_left = 75
 patch_margin_top = 75
 patch_margin_right = 75
 patch_margin_bottom = 75
-
-[node name="A" type="Label" parent="zIndexWrapper2/DialogueOptions/NinePatchRect2"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 11 )
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting"
-valign = 1
-autowrap = true
-
-[node name="NinePatchRect3" type="NinePatchRect" parent="zIndexWrapper2/DialogueOptions"]
-margin_top = 346.0
-margin_right = 180.0
-margin_bottom = 496.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 10 )
-patch_margin_left = 75
-patch_margin_top = 75
-patch_margin_right = 75
-patch_margin_bottom = 75
-
-[node name="B" type="Label" parent="zIndexWrapper2/DialogueOptions/NinePatchRect3"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 11 )
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting"
-valign = 1
-autowrap = true
-
-[node name="NinePatchRect4" type="NinePatchRect" parent="zIndexWrapper2/DialogueOptions"]
-margin_top = 500.0
-margin_right = 180.0
-margin_bottom = 650.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 10 )
-patch_margin_left = 75
-patch_margin_top = 75
-patch_margin_right = 75
-patch_margin_bottom = 75
-
-[node name="C" type="Label" parent="zIndexWrapper2/DialogueOptions/NinePatchRect4"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 11 )
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting"
-valign = 1
-autowrap = true
 
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
@@ -176,6 +96,7 @@ anchor_bottom = 1.0
 script = ExtResource( 4 )
 
 [node name="win" type="Label" parent="UI"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -190,6 +111,7 @@ align = 1
 valign = 1
 
 [node name="lose" type="Label" parent="UI"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -226,8 +148,9 @@ uppercase = true
 
 [node name="them" type="Label" parent="UI/VBoxContainer"]
 visible = false
+margin_top = 37.0
 margin_right = 222.0
-margin_bottom = 33.0
+margin_bottom = 70.0
 theme = ExtResource( 5 )
 text = "THEM"
 align = 1
@@ -236,8 +159,9 @@ uppercase = true
 
 [node name="fight" type="Label" parent="UI/VBoxContainer"]
 visible = false
+margin_top = 74.0
 margin_right = 222.0
-margin_bottom = 33.0
+margin_bottom = 107.0
 theme = ExtResource( 5 )
 text = "! FIGHT !"
 align = 1
@@ -266,31 +190,19 @@ script = ExtResource( 8 )
 
 [node name="SpeakTimer" type="Timer" parent="PlayerTwo"]
 
-[node name="Viewport" type="Viewport" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="Background" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 320, 244.5 )
-scale = Vector2( 1.01765, 1.11591 )
+[node name="Background" type="TextureRect" parent="BackgroundLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 3 )
+expand = true
 
 [node name="Coach" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 9 )
-
-[node name="SpeechBubble" type="TextureRect" parent="Coach"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -225.0
-margin_right = 225.0
-texture = ExtResource( 14 )
-
-[node name="Text" type="Label" parent="Coach/SpeechBubble"]
-margin_right = 40.0
-margin_bottom = 14.0
 
 [node name="EmojiTimeout" type="Timer" parent="Coach"]
 one_shot = true
@@ -299,16 +211,13 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="BattleTimer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Coach"]
 
-[node name="ScreenContainer" type="Sprite" parent="."]
-position = Vector2( 250, 250 )
-script = ExtResource( 13 )
-
-[node name="EndTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Bubble" type="TextureRect" parent="Coach"]
+margin_left = 19.0
+margin_top = 121.0
+margin_right = 152.0
+margin_bottom = 202.0
 
 [node name="AudioContainer" type="Node" parent="."]
 
@@ -327,13 +236,29 @@ autoplay = true
 
 [node name="Lose" type="AudioStreamPlayer" parent="AudioContainer"]
 
-[node name="LetThemFightTimer" type="Timer" parent="."]
+[node name="Viewport" type="Viewport" parent="."]
 
+[node name="ScreenContainer" type="Sprite" parent="."]
+position = Vector2( 250, 250 )
+script = ExtResource( 13 )
+
+[node name="Screen" type="AnimatedSprite" parent="."]
+
+[node name="Options" type="Control" parent="."]
+anchor_bottom = 1.0
+
+[node name="Select" type="AudioStreamPlayer" parent="Options"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+anchor_bottom = 1.0
+
+[node name="A" type="NinePatchRect" parent="Options/VBoxContainer"]
+
+[connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
+[connection signal="timeout" from="LetThemFightTimer" to="." method="_on_LetThemFightTimer_timeout"]
 [connection signal="timeout" from="PlayerOne/Keyboard/KeyboardTimer" to="PlayerOne" method="_on_KeyboardTimer_timeout"]
 [connection signal="timeout" from="PlayerOne/SpeakTimer" to="PlayerOne" method="_on_SpeakTimer_timeout"]
 [connection signal="timeout" from="PlayerTwo/Keyboard/KeyboardTimer" to="PlayerTwo" method="_on_KeyboardTimer_timeout"]
 [connection signal="timeout" from="PlayerTwo/SpeakTimer" to="PlayerTwo" method="_on_SpeakTimer_timeout"]
 [connection signal="timeout" from="Coach/BubbleTimeout" to="Coach" method="_on_BubbleTimeout_timeout"]
-[connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
-[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
-[connection signal="timeout" from="LetThemFightTimer" to="." method="_on_LetThemFightTimer_timeout"]

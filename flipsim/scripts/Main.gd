@@ -83,6 +83,7 @@ func _process(delta):
 
 func play_battle():
 	StateManager.state = StateManager.States.BATTLE
+	print("enter battle state")
 	coach.say_random_encouragement()
 	let_them_fight()
 
@@ -113,6 +114,7 @@ func _on_BattleTimer_timeout():
 		
 func play_choice():
 	StateManager.state = StateManager.States.CHOICE
+	print('enter choice state')
 	dialogue_options.set_options()
 	dialogue_options.toggle_option_visibility()
 
