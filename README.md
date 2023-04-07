@@ -2,9 +2,7 @@
 
 ## Avisos
 
-- as pequenas variações de audio o godot faz sozinho. não precisa fazer manualmente
 - marcar orientação?
-- precisa de uma mecanica de como calcular se vc respondeu certo ou nao
 - precisa de uma forma de mostrar q vc ganhou ou nao
 - o que acontece quando vc ganha?
 
@@ -17,11 +15,6 @@
 ui_accept - A?  
 ui_select - B?  
 ui_cancel - C?  
-
-## resoluções
-
-
-
 
 ## TODO
 
@@ -54,5 +47,3 @@ ui_cancel - C?
 
 ### test and polish
 tune random timeout emoji coach
-
-

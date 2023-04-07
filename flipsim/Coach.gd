@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var bubble = $SpeechBubble
 onready var text = $SpeechBubble/Text

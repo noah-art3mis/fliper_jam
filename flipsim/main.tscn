@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://assets/visual/blue_panel.png" type="Texture" id=12]
 [ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
 [ext_resource path="res://assets/visual/square.png" type="Texture" id=14]
-[ext_resource path="res://addons/emojis-for-godot/nodes/EmojiIcon.gd" type="Script" id=15]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -176,52 +175,106 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
 
-[node name="let" type="Label" parent="UI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "LET"
-
-[node name="them" type="Label" parent="UI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "THEM"
-
-[node name="fight" type="Label" parent="UI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "FIGHT"
-
 [node name="win" type="Label" parent="UI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "VOCÊ GANHOU :)"
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -133.0
+margin_top = -16.5
+margin_right = 133.0
+margin_bottom = 16.5
+theme = ExtResource( 5 )
+text = "VCs GANHOU"
+align = 1
+valign = 1
+
+[node name="lose" type="Label" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -16.5
+margin_right = 150.0
+margin_bottom = 16.5
+theme = ExtResource( 5 )
+text = "VC PERDEU"
 align = 1
 valign = 1
 clip_text = true
 
-[node name="lose" type="Label" parent="UI"]
-margin_right = 40.0
-margin_bottom = 14.0
-text = "VOCÊ PERDEU :("
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -111.0
+margin_top = -53.5
+margin_right = 111.0
+margin_bottom = 53.5
+
+[node name="let" type="Label" parent="UI/VBoxContainer"]
+visible = false
+margin_right = 222.0
+margin_bottom = 33.0
+theme = ExtResource( 5 )
+text = "LET"
 align = 1
 valign = 1
+uppercase = true
+
+[node name="them" type="Label" parent="UI/VBoxContainer"]
+visible = false
+margin_right = 222.0
+margin_bottom = 33.0
+theme = ExtResource( 5 )
+text = "THEM"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="fight" type="Label" parent="UI/VBoxContainer"]
+visible = false
+margin_right = 222.0
+margin_bottom = 33.0
+theme = ExtResource( 5 )
+text = "! FIGHT !"
+align = 1
+valign = 1
+uppercase = true
 
 [node name="PlayerOne" type="AnimatedSprite" parent="."]
 script = ExtResource( 8 )
 
+[node name="Keyboard" type="AudioStreamPlayer" parent="PlayerOne"]
+
+[node name="KeyboardTimer" type="Timer" parent="PlayerOne/Keyboard"]
+
+[node name="Emoji" type="AudioStreamPlayer" parent="PlayerOne"]
+
+[node name="SpeakTimer" type="Timer" parent="PlayerOne"]
+
 [node name="PlayerTwo" type="AnimatedSprite" parent="."]
 script = ExtResource( 8 )
 
+[node name="Keyboard" type="AudioStreamPlayer" parent="PlayerTwo"]
+
+[node name="KeyboardTimer" type="Timer" parent="PlayerTwo/Keyboard"]
+
+[node name="Emoji" type="AudioStreamPlayer" parent="PlayerTwo"]
+
+[node name="SpeakTimer" type="Timer" parent="PlayerTwo"]
+
 [node name="Viewport" type="Viewport" parent="."]
 
-[node name="Background" type="Sprite" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite" parent="CanvasLayer"]
 position = Vector2( 320, 244.5 )
 scale = Vector2( 1.01765, 1.11591 )
 texture = ExtResource( 3 )
-
-[node name="maybe use this for the stretch mode" type="TextureRect" parent="Background"]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="Coach" type="Control" parent="."]
 anchor_right = 1.0
@@ -264,13 +317,6 @@ autoplay = true
 
 [node name="Fight" type="AudioStreamPlayer" parent="AudioContainer"]
 
-[node name="Keyboard" type="AudioStreamPlayer" parent="AudioContainer"]
-
-[node name="EmojiIcon" type="TextureRect" parent="AudioContainer/Keyboard"]
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 15 )
-
 [node name="StartAudio" type="AudioStreamPlayer" parent="AudioContainer"]
 
 [node name="Beep" type="AudioStreamPlayer" parent="AudioContainer"]
@@ -283,6 +329,11 @@ script = ExtResource( 15 )
 
 [node name="LetThemFightTimer" type="Timer" parent="."]
 
+[connection signal="timeout" from="PlayerOne/Keyboard/KeyboardTimer" to="PlayerOne" method="_on_KeyboardTimer_timeout"]
+[connection signal="timeout" from="PlayerOne/SpeakTimer" to="PlayerOne" method="_on_SpeakTimer_timeout"]
+[connection signal="timeout" from="PlayerTwo/Keyboard/KeyboardTimer" to="PlayerTwo" method="_on_KeyboardTimer_timeout"]
+[connection signal="timeout" from="PlayerTwo/SpeakTimer" to="PlayerTwo" method="_on_SpeakTimer_timeout"]
 [connection signal="timeout" from="Coach/BubbleTimeout" to="Coach" method="_on_BubbleTimeout_timeout"]
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
+[connection signal="timeout" from="LetThemFightTimer" to="." method="_on_LetThemFightTimer_timeout"]
