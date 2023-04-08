@@ -41,7 +41,7 @@ func _input(event):
 		
 #input
 func _ready():
-	StateManager.state == StateManager.States.IDLE
+	StateManager.state = StateManager.States.IDLE
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:

@@ -1,12 +1,17 @@
 extends Label
 
-onready var timer = get_node("Timer")
+var BLINK_TIME = 0.8
 
+onready var timer = $BlinkTimer
+
+func _ready():
+	timer.set_wait_time(BLINK_TIME)
+	
 func piscar():
-	if timer.get_time_left() > 0.5:
-		visible = false
-	else:
+	if timer.get_time_left() < BLINK_TIME / 2:
 		visible = true
+	else:
+		visible = false
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:

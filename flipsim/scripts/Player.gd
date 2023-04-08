@@ -46,7 +46,7 @@ func speak():
 	speak_timer.start(rand_range(SPEAK_RANGE_START, SPEAK_RANGE_END))
 	
 func _on_SpeakTimer_timeout():
-	if times_spoken < 4:
+	if times_spoken < combat_emoji_map.size():
 		times_spoken += 1
 		emoji_display()
 		speak() #recursion
@@ -56,15 +56,10 @@ func _on_SpeakTimer_timeout():
 func emoji_display():
 	audio_emoji.play()
 	
-	combat_emoji = options.p1
-	combat_emoji.visible = true
-	combat_emoji.emoji_name = combat_emoji_map[times_spoken]
+	options.p1.visible = true
+	options.p1.emoji_name = combat_emoji_map[times_spoken]
 	print("emoji displayed")
 	fade_timer.start(2)
-	
-	pass
-#	TODO
-
 
 func _on_FadeOutTimer_timeout():
-	pass # Replace with function body.
+	options.p1.visible = false

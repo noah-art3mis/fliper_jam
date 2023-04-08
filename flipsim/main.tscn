@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -12,11 +12,12 @@
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f480.tres" type="Texture" id=10]
 [ext_resource path="res://scripts/Options.gd" type="Script" id=11]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60e.tres" type="Texture" id=12]
-[ext_resource path="res://ScreenContainer.gd" type="Script" id=13]
-[ext_resource path="res://addons/emojis-for-godot/nodes/ninebox.jpg" type="Texture" id=14]
-[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1eb.tres" type="Texture" id=15]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f4a9.tres" type="Texture" id=13]
+[ext_resource path="res://assets/perna2.png" type="Texture" id=14]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60b.tres" type="Texture" id=16]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f8.tres" type="Texture" id=17]
+[ext_resource path="res://assets/tile2.png" type="Texture" id=18]
+[ext_resource path="res://assets/tile1.png" type="Texture" id=19]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -56,7 +57,7 @@ autowrap = true
 uppercase = true
 script = ExtResource( 2 )
 
-[node name="Timer" type="Timer" parent="IdleLayer/PressToPlay"]
+[node name="BlinkTimer" type="Timer" parent="IdleLayer/PressToPlay"]
 wait_time = 2.0
 autostart = true
 
@@ -187,8 +188,11 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="Coach" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -224.0
+margin_right = 512.0
+margin_bottom = 224.0
 script = ExtResource( 9 )
 
 [node name="EmojiTimeout" type="Timer" parent="Coach"]
@@ -221,35 +225,46 @@ autoplay = true
 
 [node name="Lose" type="AudioStreamPlayer" parent="AudioContainer"]
 
-[node name="Viewport" type="Viewport" parent="."]
-
-[node name="ScreenContainer" type="Sprite" parent="."]
-position = Vector2( 250, 250 )
-script = ExtResource( 13 )
-
-[node name="Screen" type="AnimatedSprite" parent="."]
-
 [node name="OptionsLeft" type="Control" parent="."]
 anchor_bottom = 1.0
+margin_left = 9.0
 margin_right = 136.0
 script = ExtResource( 11 )
 
 [node name="Select" type="AudioStreamPlayer" parent="OptionsLeft"]
 
-[node name="Question" type="HBoxContainer" parent="OptionsLeft"]
-margin_left = 28.0
-margin_top = 149.0
-margin_right = 144.0
-margin_bottom = 185.0
+[node name="Q" type="NinePatchRect" parent="OptionsLeft"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 9.0
+margin_top = -136.5
+margin_right = 136.0
+margin_bottom = -83.5
+texture = ExtResource( 18 )
+region_rect = Rect2( 0, 0, 18, 18 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 
-[node name="Q1" type="TextureRect" parent="OptionsLeft/Question"]
+[node name="Question" type="HBoxContainer" parent="OptionsLeft/Q"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.0
+margin_top = -18.0
+margin_right = 58.0
+margin_bottom = 18.0
+
+[node name="Q1" type="TextureRect" parent="OptionsLeft/Q/Question"]
 margin_right = 36.0
 margin_bottom = 36.0
 texture = ExtResource( 12 )
 script = ExtResource( 6 )
 emoji_name = "2714"
 
-[node name="Q2" type="TextureRect" parent="OptionsLeft/Question"]
+[node name="Q2" type="TextureRect" parent="OptionsLeft/Q/Question"]
 margin_left = 40.0
 margin_right = 76.0
 margin_bottom = 36.0
@@ -257,21 +272,31 @@ texture = ExtResource( 7 )
 script = ExtResource( 6 )
 emoji_name = "grinning face with smiling eyes"
 
-[node name="Q3" type="TextureRect" parent="OptionsLeft/Question"]
+[node name="Q3" type="TextureRect" parent="OptionsLeft/Q/Question"]
 margin_left = 80.0
 margin_right = 116.0
 margin_bottom = 36.0
-texture = ExtResource( 15 )
+texture = ExtResource( 13 )
 script = ExtResource( 6 )
-emoji_name = "1f0cf"
+emoji_name = "poop"
 
-[node name="Sprite" type="Sprite" parent="OptionsLeft/Question"]
+[node name="PernaRect" type="TextureRect" parent="OptionsLeft/Q"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 14 )
 
 [node name="Answer" type="VBoxContainer" parent="OptionsLeft"]
-anchor_top = 0.475
+visible = false
+anchor_top = 0.463
 anchor_bottom = 0.801
 margin_left = 7.0
-margin_top = -14.8
+margin_top = -9.42401
 margin_right = 136.0
 margin_bottom = -5.84799
 size_flags_horizontal = 3
@@ -282,8 +307,8 @@ margin_right = 129.0
 margin_bottom = 49.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 7, 7 )
+texture = ExtResource( 19 )
+region_rect = Rect2( 2, 2, 14, 14 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -329,8 +354,8 @@ margin_right = 129.0
 margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 7, 7 )
+texture = ExtResource( 19 )
+region_rect = Rect2( 2, 2, 14, 14 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -376,8 +401,8 @@ margin_right = 129.0
 margin_bottom = 155.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 14 )
-region_rect = Rect2( 1, 1, 7, 7 )
+texture = ExtResource( 19 )
+region_rect = Rect2( 2, 2, 14, 14 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
