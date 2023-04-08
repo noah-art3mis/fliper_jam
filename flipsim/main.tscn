@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -36,8 +36,10 @@
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f627.tres" type="Texture" id=34]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f62e.tres" type="Texture" id=35]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f633.tres" type="Texture" id=36]
-[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f1.tres" type="Texture" id=37]
-[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f5.tres" type="Texture" id=38]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/2601.tres" type="Texture" id=37]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f4a5.tres" type="Texture" id=38]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f48b.tres" type="Texture" id=39]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f525.tres" type="Texture" id=40]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -457,9 +459,9 @@ valign = 1
 margin_left = 23.0
 margin_right = 59.0
 margin_bottom = 36.0
-texture = ExtResource( 37 )
+texture = ExtResource( 39 )
 script = ExtResource( 6 )
-emoji_name = "liar"
+emoji_name = "kiss"
 
 [node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_left = 63.0
@@ -529,9 +531,9 @@ emoji_name = "open_mouth"
 margin_left = 103.0
 margin_right = 139.0
 margin_bottom = 36.0
-texture = ExtResource( 38 )
+texture = ExtResource( 40 )
 script = ExtResource( 6 )
-emoji_name = "party_popper"
+emoji_name = "fire"
 
 [node name="C" type="NinePatchRect" parent="OptionsLeft/Answer"]
 margin_top = 106.0
@@ -577,17 +579,17 @@ emoji_name = "sleeping"
 margin_left = 63.0
 margin_right = 99.0
 margin_bottom = 36.0
-texture = ExtResource( 38 )
+texture = ExtResource( 37 )
 script = ExtResource( 6 )
-emoji_name = "pouting face"
+emoji_name = "cloud"
 
 [node name="C3" type="TextureRect" parent="OptionsLeft/Answer/C/HBoxContainer"]
 margin_left = 103.0
 margin_right = 139.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 38 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "boom"
 
 [node name="OptionsRight" type="Control" parent="."]
 anchor_left = 1.0
