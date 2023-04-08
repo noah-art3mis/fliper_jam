@@ -11,9 +11,9 @@ onready var logo = $Logo
 onready var coach = $Coach
 onready var win_text = $UI/win
 onready var lose_text = $UI/lose
-onready var let = $UI/let
-onready var them = $UI/them
-onready var fight = $UI/fight
+onready var let = $UI/VBoxContainer/let
+onready var them = $UI/VBoxContainer/them
+onready var fight = $UI/VBoxContainer/fight
 
 #timers
 onready var battle_timer = $BattleTimer
@@ -34,14 +34,22 @@ onready var audio_lose = $AudioContainer/Lose
 var points = 0
 var first_half = true
 
+func play_animations():
+	playerOne.play()
+	playerTwo.play()
+
+func stop_animations():
+	playerOne.stop()
+	playerTwo.stop()
+
+#set animations
+func _ready():
+	stop_animations()
 #quit game
 func _input(event):
 	if event.is_action_pressed("p"):
 		get_tree().quit()
 		
-#input
-func _ready():
-	StateManager.state = StateManager.States.IDLE
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
@@ -82,6 +90,7 @@ func _process(_delta):
 
 func play_battle():
 	StateManager.state = StateManager.States.BATTLE
+	stop_animations()
 	print("enter battle state")
 	let_them_fight()
 
@@ -104,6 +113,7 @@ func _on_LetThemFightTimer_timeout():
 	battle_timer.start(BATTLE_WAIT_TIME)
 	playerOne.speak()
 	playerTwo.speak()
+	play_animations()
 	
 func _on_BattleTimer_timeout():
 	if first_half:
@@ -116,6 +126,7 @@ func play_choice():
 	print('enter choice state')
 	dialogue_options.set_options()
 	dialogue_options.toggle_option_visibility()
+	stop_animations()
 
 #TODO MECHANICS
 func choose(choice):
@@ -154,10 +165,13 @@ func try_to_end():
 func play_win_animation():
 	win_text.visible = true
 	audio_win.play()
+	stop_animations()
 
 func play_lose_animation():
 	lose_text.visible = true
 	audio_lose.play()
+	stop_animations()
+
 
 func _on_EndTimer_timeout():
 	game_end()
