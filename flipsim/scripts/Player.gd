@@ -46,14 +46,14 @@ func speak():
 	speak_timer.start(SPEAK_TIME)
 	
 func _on_SpeakTimer_timeout():
-#	if times_spoken < combat_emoji_map_l.size() - 1:
 	if times_spoken < 4:
 		emoji_display()
 		times_spoken += 1
 		speak() #recursion
 	else:
+		times_spoken = 0
+		
 		if StateManager.first_half:
-			times_spoken = 0
 			StateManager.state = StateManager.States.CHOICE
 			print('enter choice state via player')
 			options_l.p1.emoji_name = "question"
@@ -62,6 +62,7 @@ func _on_SpeakTimer_timeout():
 			get_parent().try_to_end()
 
 func emoji_display():
+	print("display emoji")
 	audio_emoji.play()
 	
 	if StateManager.first_half:

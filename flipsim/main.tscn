@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/p2.png" type="Texture" id=12]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/2753.tres" type="Texture" id=13]
 [ext_resource path="res://assets/perna2.png" type="Texture" id=14]
-[ext_resource path="res://assets/lil.png" type="Texture" id=15]
+[ext_resource path="res://assets/lil2.png" type="Texture" id=15]
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f60b.tres" type="Texture" id=16]
 [ext_resource path="res://assets/audio/Select.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/tile2.png" type="Texture" id=18]
@@ -111,19 +111,19 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 75, 52 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 15 )
 region = Rect2( 75, 0, 75, 52 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -147,6 +147,7 @@ one_shot = true
 one_shot = true
 
 [node name="LetThemFightTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="IdleLayer" type="CanvasLayer" parent="."]
 
@@ -238,6 +239,7 @@ valign = 1
 uppercase = true
 
 [node name="FightTimer" type="Timer" parent="UI/VBoxContainer/fight"]
+one_shot = true
 
 [node name="PlayerOne" type="AnimatedSprite" parent="."]
 position = Vector2( 180, 270 )
@@ -278,6 +280,7 @@ speed_scale = 0.6
 [node name="Emoji" type="AudioStreamPlayer" parent="PlayerTwo"]
 
 [node name="SpeakTimer" type="Timer" parent="PlayerTwo"]
+one_shot = true
 
 [node name="Coach2" type="AnimatedSprite" parent="PlayerTwo"]
 position = Vector2( 107, 99 )
@@ -296,7 +299,7 @@ expand = true
 [node name="ScreenAnimation" type="AnimatedSprite" parent="BackgroundLayer"]
 position = Vector2( 253, 182 )
 scale = Vector2( 1.5, 1.5 )
-frames = SubResource( 9 )
+frames = SubResource( 18 )
 speed_scale = 0.5
 
 [node name="Coach" type="Control" parent="."]
@@ -886,8 +889,10 @@ volume_db = -3.0
 autoplay = true
 
 [node name="DrumrollTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="ResetTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

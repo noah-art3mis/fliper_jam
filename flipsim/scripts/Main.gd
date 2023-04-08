@@ -77,13 +77,13 @@ func _process(_delta):
 		answer_l.visible = true
 #		answer_r.visible = true #TODO
 		
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("A"):
 			audio_interface_beep.play()
 			choose("A")
-		if Input.is_action_just_pressed("ui_select"):
+		if Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("B"):
 			audio_interface_beep.play()
 			choose("B")
-		if Input.is_action_just_pressed("ui_cancel"):
+		if Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("C"):
 			audio_interface_beep.play()
 			choose("C")
 	else:
@@ -114,17 +114,10 @@ func _on_FightTimer_timeout():
 func _on_BattleTimer_timeout():
 	print("try choice")
 	if StateManager.first_half:
-		play_choice()
+		pass
 	else:
 		try_to_end()
 		
-func play_choice():
-	StateManager.state = StateManager.States.CHOICE
-	print('enter choice state')
-	dialogue_options.set_options()
-	dialogue_options.toggle_option_visibility()
-	stop_animations()
-
 func choose(choice):
 	print("make choice")
 	var _emoji
@@ -179,9 +172,13 @@ func play_win_animation(param):
 		$OptionsLeft/Q/Combat/CanvasLayer/P1.emoji_name = "poop"
 		$OptionsRight/Q/Combat/CanvasLayer/P1.emoji_name = "trophy"
 
-func _on_Win_finished():
-	reset()
+#func _on_Win_finished():
+#	reset()
 
+func _on_ResetTimer_timeout():
+	print("start reset")
+	reset()
+	
 func reset():
 	print("reset")
 	points_l = 0
@@ -192,10 +189,4 @@ func reset():
 	StateManager.over = false
 	StateManager.state = StateManager.States.IDLE
 	audio_win.stop()
-
-
-func _on_ResetTimer_timeout():
-	print("start reset")
-	reset()
-#	stop emojis app
-#	stop showing options
+	$OptionsLeft/Q/Question.visible = false
