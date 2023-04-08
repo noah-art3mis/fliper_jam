@@ -1,6 +1,6 @@
 extends Node
 
-var BATTLE_WAIT_TIME = 10
+var BATTLE_WAIT_TIME = 6
 var END_TIME = 5
 
 onready var dialogue_options = $OptionsLeft
@@ -14,11 +14,13 @@ onready var them = $UI/VBoxContainer/them
 onready var fight = $UI/VBoxContainer/fight
 
 onready var bg_animation = $BackgroundLayer/ScreenAnimation
+onready var p1_coach = $PlayerOne/Coach
+onready var p2_coach = $PlayerTwo/Coach2
 
 #timers
 onready var battle_timer = $BattleTimer
 onready var end_timer = $EndTimer
-onready var fight_timer = $LetThemFightTimer
+onready var fight_timer = $UI/VBoxContainer/fight/FightTimer
 
 #audio
 onready var audio_music = $AudioContainer/Music
@@ -31,17 +33,24 @@ onready var audio_emoji = $AudioContainer/Emoji
 onready var audio_win = $AudioContainer/Win
 onready var audio_lose = $AudioContainer/Lose
 
-var points = 0
-var first_half = true
+onready var answer_l = $OptionsLeft/Answer
+onready var answer_r = $OptionsRight/Answer
+
+var points_l = 0
+var points_r = 0
 
 func play_animations():
 	playerOne.play()
 	playerTwo.play()
+	p1_coach.play()
+	p2_coach.play()
 	bg_animation.play()
 
 func stop_animations():
 	playerOne.stop()
 	playerTwo.stop()
+	p1_coach.stop()
+	p2_coach.stop()
 	bg_animation.stop()
 	
 
@@ -57,37 +66,28 @@ func _input(event):
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
-		if Input.is_action_just_pressed("start"):
+		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("ui_cancel"):
 			print("start")
 			play_battle()
 			audio_start.play()
 			
-#	if StateManager.state == StateManager.States.BATTLE:
-#		if Input.is_action_just_pressed("ui_accept"):
-#			coach.say_emoji("A")
-#		if Input.is_action_just_pressed("ui_select"):
-#			coach.say_emoji("B")
-#		if Input.is_action_just_pressed("ui_cancel"):
-#			coach.say_emoji("C")
-#		if Input.is_action_just_pressed("ui_up"):
-#			coach.say_emoji("up")
-#		if Input.is_action_just_pressed("ui_down"):
-#			coach.say_emoji("down")
-#		if Input.is_action_just_pressed("ui_left"):
-#			coach.say_emoji("left")
-#		if Input.is_action_just_pressed("ui_right"):
-#			coach.say_emoji("right")
 
 	if StateManager.state == StateManager.States.CHOICE:
-		if Input.is_action_just_pressed("A"):
+		answer_l.visible = true
+		answer_r.visible = true
+		
+		if Input.is_action_just_pressed("ui_accept"):
 			audio_interface_beep.play()
 			choose("A")
-		if Input.is_action_just_pressed("B"):
+		if Input.is_action_just_pressed("ui_select"):
 			audio_interface_beep.play()
 			choose("B")
-		if Input.is_action_just_pressed("C"):
+		if Input.is_action_just_pressed("ui_cancel"):
 			audio_interface_beep.play()
 			choose("C")
+	else:
+		answer_l.visible = false
+		answer_r.visible = false
 			
 	if StateManager.state == StateManager.States.END:
 		pass
@@ -99,28 +99,20 @@ func play_battle():
 	let_them_fight()
 
 func let_them_fight():
-	fight_timer.start(3)
-	if fight_timer.get_time_left() < 3:
-		let.visible = true
-#		audio_let.play()
-	if fight_timer.get_time_left() < 2:
-		them.visible = true
-#		audio_them.play()
-	if fight_timer.get_time_left() < 1:
-		fight.visible = true
-#		audio_fight.play()
-		
-func _on_LetThemFightTimer_timeout():
-	let.visible = false
-	them.visible = false
+	fight_timer.start(2.5)
+	fight.visible = true
+	
+
+func _on_FightTimer_timeout():
 	fight.visible = false
 	battle_timer.start(BATTLE_WAIT_TIME)
 	playerOne.speak()
-	playerTwo.speak()
+#	playerTwo.speak()
 	play_animations()
 	
 func _on_BattleTimer_timeout():
-	if first_half:
+	print("try choice")
+	if StateManager.first_half:
 		play_choice()
 	else:
 		try_to_end()
@@ -132,8 +124,8 @@ func play_choice():
 	dialogue_options.toggle_option_visibility()
 	stop_animations()
 
-#TODO MECHANICS
 func choose(choice):
+	print("make choice")
 	var _emoji
 	
 	match choice:
@@ -146,21 +138,21 @@ func choose(choice):
 	
 	match _emoji:
 		dialogue_options.good_option:
-			points += 100
+			points_l += 100
 		dialogue_options.medium_option:
-			points += 50
+			points_l += 50
 		dialogue_options.bad_option:
-			points += 10
+			points_l += 10
 	
 	change_to_second_half()
-	play_battle()
+	StateManager.state = StateManager.States.BATTLE
+	_on_FightTimer_timeout()
 
 func change_to_second_half():
-	first_half = false
+	StateManager.first_half = false
 
-#TODO END
 func try_to_end():
-	if points > randi() % 75:
+	if points_l > randi() % 75:
 		play_win_animation()
 	else:
 		play_lose_animation()
@@ -172,18 +164,20 @@ func play_win_animation():
 	stop_animations()
 
 func play_lose_animation():
-	lose_text.visible = true
-	audio_lose.play()
-	stop_animations()
+	pass
 
 
 func _on_EndTimer_timeout():
 	game_end()
 
 func game_end():
-	points = 0
-	first_half = true
+	points_l = 0
+	points_r = 0
+	StateManager.first_half = true
 	win_text.visible = false
 	lose_text.visible = false
 		
 	StateManager.state = StateManager.States.IDLE
+
+
+

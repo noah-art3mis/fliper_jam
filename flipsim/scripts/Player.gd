@@ -5,15 +5,20 @@ extends AnimatedSprite
 var KEYBOARD_RANGE_START = 1
 var KEYBOARD_RANGE_END = 2
 
-var SPEAK_RANGE_START = 1
-var SPEAK_RANGE_END = 2
+var SPEAK_TIME = 2
 
 onready var times_spoken = 0
 
-var combat_emoji_map = ["yum", "yum", "yum"]
+var combat_emoji_map_l = ["mag", "sunglasses", "scream"]
+var combat_emoji_map_r = ["nerd", "cold_sweat", "yum"]
 
-onready var combat_emoji = get_node("../OptionsLeft/Combat/P1")
-onready var options = get_node("../OptionsLeft") #TODO THIS IS ONLY FOR LEFT PLAYER
+
+onready var p1_l = get_node("../OptionsLeft/Q/Combat/CanvasLayer/P1")
+onready var p1_r = get_node("../OptionsRight/Q/Combat/CanvasLayer/P1")
+onready var options_l = get_node("../OptionsLeft")
+onready var options_r = get_node("../OptionsRight")
+onready var ql = get_node("../OptionsLeft/Q")
+onready var qr = get_node("../OptionsRight/Q")
 onready var speak_timer = $SpeakTimer
 onready var audio_keyboard = $Keyboard
 onready var keyboard_timer = $Keyboard/KeyboardTimer
@@ -22,45 +27,43 @@ onready var fade_timer = $FadeTimer
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
-		animate_player()
-		play_audio_random()
+		p1_l.visible = false
+		p1_r.visible = false
+		ql.visible = false
+		qr.visible = false
 		
 	if StateManager.state == StateManager.States.BATTLE:
-		animate_player()
-		play_audio_random()
-		
-		
-func animate_player():
-	pass
-#	TODO
-
-func play_audio_random():
-	if keyboard_timer.get_time_left() == 0:
-		keyboard_timer.start(rand_range(KEYBOARD_RANGE_START, KEYBOARD_RANGE_END))
-
-func _on_KeyboardTimer_timeout():
-	audio_keyboard.play()
-	print("keyboard_audio played")
-
+		p1_l.visible = true
+		p1_r.visible = true
+		ql.visible = true
+		qr.visible = true
+			
 func speak():
-	speak_timer.start(rand_range(SPEAK_RANGE_START, SPEAK_RANGE_END))
+	p1_l.visible = true
+	p1_r.visible = true
+	speak_timer.start(SPEAK_TIME)
 	
 func _on_SpeakTimer_timeout():
-	if times_spoken < combat_emoji_map.size():
-		times_spoken += 1
+#	if times_spoken < combat_emoji_map_l.size() - 1:
+	if times_spoken < 4:
 		emoji_display()
+		times_spoken += 1
 		speak() #recursion
 	else:
-		return
+		if StateManager.first_half:
+			times_spoken = 0
+			StateManager.state = StateManager.States.CHOICE
+			print('enter choice state via player')
+			options_l.p1.emoji_name = "question"
+			options_r.p1.emoji_name = "question"
+		else:
+			get_parent().try_to_end()
 
 func emoji_display():
 	audio_emoji.play()
 	
-	options.p1.emoji_name = combat_emoji_map[times_spoken]
-	options.p1.visible = true
-	print("emoji displayed")
-	fade_timer.set_wait_time(2)
-	fade_timer.start()
-
-func _on_FadeOutTimer_timeout():
-	options.p1.visible = false
+	
+	options_l.p1.emoji_name = combat_emoji_map_l[times_spoken - 1]
+	options_l.p1.visible = true
+	options_r.p1.emoji_name = combat_emoji_map_r[times_spoken - 1]
+	options_r.p1.visible = true
