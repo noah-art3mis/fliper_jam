@@ -2,6 +2,7 @@ extends Node
 
 var BATTLE_WAIT_TIME = 6
 var END_TIME = 5
+var WIN_PERCENT = 10
 
 onready var dialogue_options = $OptionsLeft
 onready var playerOne = $PlayerOne
@@ -18,7 +19,7 @@ onready var p1_coach = $PlayerOne/Coach
 onready var p2_coach = $PlayerTwo/Coach2
 
 #timers
-onready var battle_timer = $BattleTimer
+#onready var battle_timer = $BattleTimer
 onready var end_timer = $EndTimer
 onready var fight_timer = $UI/VBoxContainer/fight/FightTimer
 
@@ -74,7 +75,7 @@ func _process(_delta):
 
 	if StateManager.state == StateManager.States.CHOICE:
 		answer_l.visible = true
-		answer_r.visible = true
+#		answer_r.visible = true #TODO
 		
 		if Input.is_action_just_pressed("ui_accept"):
 			audio_interface_beep.play()
@@ -105,7 +106,7 @@ func let_them_fight():
 
 func _on_FightTimer_timeout():
 	fight.visible = false
-	battle_timer.start(BATTLE_WAIT_TIME)
+	$BattleTimer.start(BATTLE_WAIT_TIME)
 	playerOne.speak()
 #	playerTwo.speak()
 	play_animations()
@@ -152,32 +153,49 @@ func change_to_second_half():
 	StateManager.first_half = false
 
 func try_to_end():
-	if points_l > randi() % 75:
-		play_win_animation()
-	else:
-		play_lose_animation()
-	end_timer.start(END_TIME)
+	print("end")
+	
+	if !StateManager.over:
+		StateManager.state = StateManager.States.END
+		if points_l > randi() % WIN_PERCENT:
+			play_win_animation("l")
+		else:
+			play_win_animation("r")
+		StateManager.over = true
+	else: 
+		$ResetTimer.start(1)
 
-func play_win_animation():
-	win_text.visible = true
-	audio_win.play()
-	stop_animations()
+func play_win_animation(param):
+	if param == "l":
+		win_text.visible = true
+		audio_win.play()
+		stop_animations()
+		$OptionsLeft/Q/Combat/CanvasLayer/P1.emoji_name = "trophy"
+		$OptionsRight/Q/Combat/CanvasLayer/P1.emoji_name = "poop"
+	if param == "r":
+		lose_text.visible = true
+		audio_win.play()
+		stop_animations()
+		$OptionsLeft/Q/Combat/CanvasLayer/P1.emoji_name = "poop"
+		$OptionsRight/Q/Combat/CanvasLayer/P1.emoji_name = "trophy"
 
-func play_lose_animation():
-	pass
+func _on_Win_finished():
+	reset()
 
-
-func _on_EndTimer_timeout():
-	game_end()
-
-func game_end():
+func reset():
+	print("reset")
 	points_l = 0
 	points_r = 0
 	StateManager.first_half = true
 	win_text.visible = false
 	lose_text.visible = false
-		
+	StateManager.over = false
 	StateManager.state = StateManager.States.IDLE
+	audio_win.stop()
 
 
-
+func _on_ResetTimer_timeout():
+	print("start reset")
+	reset()
+#	stop emojis app
+#	stop showing options

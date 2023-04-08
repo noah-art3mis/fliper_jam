@@ -10,8 +10,10 @@ var SPEAK_TIME = 2
 onready var times_spoken = 0
 
 var combat_emoji_map_l = ["mag", "sunglasses", "scream"]
-var combat_emoji_map_r = ["nerd", "cold_sweat", "yum"]
+var combat_emoji_map_r = ["nerd", "dash", "alien"]
 
+var combat_emoji_map_l_2 = ["shush", "punch", "sleeping"]
+var combat_emoji_map_r_2 = ["eyes", "fire", "blush"]
 
 onready var p1_l = get_node("../OptionsLeft/Q/Combat/CanvasLayer/P1")
 onready var p1_r = get_node("../OptionsRight/Q/Combat/CanvasLayer/P1")
@@ -62,8 +64,13 @@ func _on_SpeakTimer_timeout():
 func emoji_display():
 	audio_emoji.play()
 	
-	
-	options_l.p1.emoji_name = combat_emoji_map_l[times_spoken - 1]
-	options_l.p1.visible = true
-	options_r.p1.emoji_name = combat_emoji_map_r[times_spoken - 1]
-	options_r.p1.visible = true
+	if StateManager.first_half:
+		options_l.p1.emoji_name = combat_emoji_map_l[times_spoken - 1]
+		options_l.p1.visible = true
+		options_r.p1.emoji_name = combat_emoji_map_r[times_spoken - 1]
+		options_r.p1.visible = true
+	else:
+		options_l.p1.emoji_name = combat_emoji_map_l_2[times_spoken - 1]
+		options_l.p1.visible = true
+		options_r.p1.emoji_name = combat_emoji_map_r_2[times_spoken - 1]
+		options_r.p1.visible = true

@@ -8,3 +8,4 @@ func change_state_to(new_state):
 	state = new_state
 
 var first_half = true
+var over = false

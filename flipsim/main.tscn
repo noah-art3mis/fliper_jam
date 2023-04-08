@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Piscar.gd" type="Script" id=2]
@@ -31,7 +31,13 @@
 [ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f607.tres" type="Texture" id=29]
 [ext_resource path="res://assets/audio/squeak.wav" type="AudioStream" id=30]
 [ext_resource path="res://assets/fonts/options_theme.tres" type="Theme" id=31]
-[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1e6.tres" type="Texture" id=32]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f634.tres" type="Texture" id=32]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f3c6.tres" type="Texture" id=33]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f627.tres" type="Texture" id=34]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f62e.tres" type="Texture" id=35]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f633.tres" type="Texture" id=36]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f1.tres" type="Texture" id=37]
+[ext_resource path="res://addons/emojis-for-godot/emojis/36x36/1f1f5.tres" type="Texture" id=38]
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -310,36 +316,6 @@ one_shot = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Coach"]
 
-[node name="AudioContainer" type="Node" parent="."]
-
-[node name="Music" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 22 )
-autoplay = true
-
-[node name="Let" type="AudioStreamPlayer" parent="AudioContainer"]
-
-[node name="Them" type="AudioStreamPlayer" parent="AudioContainer"]
-
-[node name="Fight" type="AudioStreamPlayer" parent="AudioContainer"]
-
-[node name="StartAudio" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 20 )
-
-[node name="Beep" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 17 )
-
-[node name="Emoji" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 30 )
-volume_db = -6.0
-
-[node name="Win" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 21 )
-
-[node name="Ambient" type="AudioStreamPlayer" parent="AudioContainer"]
-stream = ExtResource( 23 )
-volume_db = -3.0
-autoplay = true
-
 [node name="OptionsLeft" type="Control" parent="."]
 anchor_bottom = 1.0
 margin_left = 9.0
@@ -477,25 +453,25 @@ valign = 1
 margin_left = 23.0
 margin_right = 59.0
 margin_bottom = 36.0
-texture = ExtResource( 32 )
+texture = ExtResource( 37 )
 script = ExtResource( 6 )
-emoji_name = "a"
+emoji_name = "liar"
 
 [node name="A2" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_left = 63.0
 margin_right = 99.0
 margin_bottom = 36.0
-texture = ExtResource( 16 )
+texture = ExtResource( 36 )
 script = ExtResource( 6 )
-emoji_name = "yum"
+emoji_name = "flushed"
 
 [node name="A3" type="TextureRect" parent="OptionsLeft/Answer/A/HBoxContainer"]
 margin_left = 103.0
 margin_right = 139.0
 margin_bottom = 36.0
-texture = ExtResource( 16 )
+texture = ExtResource( 10 )
 script = ExtResource( 6 )
-emoji_name = "yum"
+emoji_name = "skull"
 
 [node name="B" type="NinePatchRect" parent="OptionsLeft/Answer"]
 margin_top = 53.0
@@ -533,25 +509,25 @@ valign = 1
 margin_left = 23.0
 margin_right = 59.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 34 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "anguished"
 
 [node name="B2" type="TextureRect" parent="OptionsLeft/Answer/B/HBoxContainer"]
 margin_left = 63.0
 margin_right = 99.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 35 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "open_mouth"
 
 [node name="B3" type="TextureRect" parent="OptionsLeft/Answer/B/HBoxContainer"]
 margin_left = 103.0
 margin_right = 139.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 38 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "party_popper"
 
 [node name="C" type="NinePatchRect" parent="OptionsLeft/Answer"]
 margin_top = 106.0
@@ -589,17 +565,17 @@ valign = 1
 margin_left = 23.0
 margin_right = 59.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 32 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "sleeping"
 
 [node name="C2" type="TextureRect" parent="OptionsLeft/Answer/C/HBoxContainer"]
 margin_left = 63.0
 margin_right = 99.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 38 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "pouting face"
 
 [node name="C3" type="TextureRect" parent="OptionsLeft/Answer/C/HBoxContainer"]
 margin_left = 103.0
@@ -810,9 +786,9 @@ emoji_name = "skull"
 margin_left = 80.0
 margin_right = 116.0
 margin_bottom = 36.0
-texture = ExtResource( 10 )
+texture = ExtResource( 33 )
 script = ExtResource( 6 )
-emoji_name = "skull"
+emoji_name = "trophy"
 
 [node name="Label" type="Label" parent="OptionsRight/Answer/B/HBoxContainer"]
 margin_left = 120.0
@@ -879,7 +855,39 @@ theme = ExtResource( 31 )
 text = " C"
 valign = 1
 
+[node name="AudioContainer" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 22 )
+autoplay = true
+
+[node name="Let" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Them" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="Fight" type="AudioStreamPlayer" parent="AudioContainer"]
+
+[node name="StartAudio" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 20 )
+
+[node name="Beep" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 17 )
+
+[node name="Emoji" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 30 )
+volume_db = -6.0
+
+[node name="Win" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 21 )
+
+[node name="Ambient" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource( 23 )
+volume_db = -3.0
+autoplay = true
+
 [node name="DrumrollTimer" type="Timer" parent="."]
+
+[node name="ResetTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="BattleTimer" to="." method="_on_BattleTimer_timeout"]
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
@@ -891,3 +899,5 @@ valign = 1
 [connection signal="timeout" from="PlayerTwo/Keyboard/KeyboardTimer" to="PlayerTwo" method="_on_KeyboardTimer_timeout"]
 [connection signal="timeout" from="PlayerTwo/SpeakTimer" to="PlayerTwo" method="_on_SpeakTimer_timeout"]
 [connection signal="timeout" from="Coach/BubbleTimeout" to="Coach" method="_on_BubbleTimeout_timeout"]
+[connection signal="finished" from="AudioContainer/Win" to="." method="_on_Win_finished"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]
