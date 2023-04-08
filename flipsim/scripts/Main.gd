@@ -68,7 +68,7 @@ func _input(event):
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
-		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("ui_cancel"):
+		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("B") || Input.is_action_just_pressed("A") || Input.is_action_just_pressed("C"):
 			print("start")
 			play_battle()
 			audio_start.play()
