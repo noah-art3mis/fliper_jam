@@ -6,14 +6,14 @@ var END_TIME = 5
 onready var dialogue_options = $OptionsLeft
 onready var playerOne = $PlayerOne
 onready var playerTwo = $PlayerTwo
-onready var pressToPlay = $UI/PressToPlay
-onready var logo = $Logo
 onready var coach = $Coach
 onready var win_text = $UI/win
 onready var lose_text = $UI/lose
 onready var let = $UI/VBoxContainer/let
 onready var them = $UI/VBoxContainer/them
 onready var fight = $UI/VBoxContainer/fight
+
+onready var bg_animation = $BackgroundLayer/ScreenAnimation
 
 #timers
 onready var battle_timer = $BattleTimer
@@ -37,14 +37,18 @@ var first_half = true
 func play_animations():
 	playerOne.play()
 	playerTwo.play()
+	bg_animation.play()
 
 func stop_animations():
 	playerOne.stop()
 	playerTwo.stop()
+	bg_animation.stop()
+	
 
 #set animations
 func _ready():
-	stop_animations()
+	play_animations()
+	
 #quit game
 func _input(event):
 	if event.is_action_pressed("p"):

@@ -1,9 +1,9 @@
 # flip sim
 
 ## TODO
-bug?
-inserir dados emojis
-colocar ui direito
+ir ate o final
+trocar lil por lil2
+emojis codigos
 
 ### audio
 

@@ -18,7 +18,7 @@ onready var speak_timer = $SpeakTimer
 onready var audio_keyboard = $Keyboard
 onready var keyboard_timer = $Keyboard/KeyboardTimer
 onready var audio_emoji = $Emoji
-onready var fade_timer = $FadeOutTimer
+onready var fade_timer = $FadeTimer
 
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
@@ -56,10 +56,11 @@ func _on_SpeakTimer_timeout():
 func emoji_display():
 	audio_emoji.play()
 	
-	options.p1.visible = true
 	options.p1.emoji_name = combat_emoji_map[times_spoken]
+	options.p1.visible = true
 	print("emoji displayed")
-	fade_timer.start(2)
+	fade_timer.set_wait_time(2)
+	fade_timer.start()
 
 func _on_FadeOutTimer_timeout():
 	options.p1.visible = false
