@@ -258,6 +258,7 @@ stream = ExtResource( 30 )
 
 [node name="SpeakTimer" type="Timer" parent="PlayerOne"]
 wait_time = 3.0
+one_shot = true
 
 [node name="FadeTimer" type="Timer" parent="PlayerOne"]
 one_shot = true

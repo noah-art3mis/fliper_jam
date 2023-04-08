@@ -58,6 +58,7 @@ func stop_animations():
 #set animations
 func _ready():
 	play_animations()
+	randomize()
 	
 #quit game
 func _input(event):
@@ -106,6 +107,10 @@ func let_them_fight():
 
 func _on_FightTimer_timeout():
 	fight.visible = false
+	start_battle()
+
+func start_battle():
+	print("battle")
 	$BattleTimer.start(BATTLE_WAIT_TIME)
 	playerOne.speak()
 #	playerTwo.speak()
@@ -119,7 +124,7 @@ func _on_BattleTimer_timeout():
 		try_to_end()
 		
 func choose(choice):
-	print("make choice")
+	print("choose")
 	var _emoji
 	
 	match choice:
@@ -139,10 +144,11 @@ func choose(choice):
 			points_l += 10
 	
 	change_to_second_half()
-	StateManager.state = StateManager.States.BATTLE
-	_on_FightTimer_timeout()
+	start_battle()
 
 func change_to_second_half():
+	StateManager.state = StateManager.States.BATTLE
+	$PlayerOne.times_spoken = 0
 	StateManager.first_half = false
 
 func try_to_end():
@@ -150,7 +156,12 @@ func try_to_end():
 	
 	if !StateManager.over:
 		StateManager.state = StateManager.States.END
-		if points_l > randi() % WIN_PERCENT:
+#		if points_l > randi() % WIN_PERCENT:
+#			play_win_animation("l")
+#		else:
+#			play_win_animation("r")
+		var r = randi() % 2
+		if r == 1:
 			play_win_animation("l")
 		else:
 			play_win_animation("r")
@@ -190,3 +201,4 @@ func reset():
 	StateManager.state = StateManager.States.IDLE
 	audio_win.stop()
 	$OptionsLeft/Q/Question.visible = false
+	$PlayerOne.times_spoken = 0

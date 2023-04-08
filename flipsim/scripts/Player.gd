@@ -10,7 +10,7 @@ var SPEAK_TIME = 2
 onready var times_spoken = 0
 
 var combat_emoji_map_l = ["mag", "sunglasses", "scream"]
-var combat_emoji_map_r = ["nerd", "dash", "alien"]
+var combat_emoji_map_r = ["nerd", "rage", "alien"]
 
 var combat_emoji_map_l_2 = ["shush", "punch", "sleeping"]
 var combat_emoji_map_r_2 = ["eyes", "fire", "blush"]
@@ -44,14 +44,15 @@ func speak():
 	p1_l.visible = true
 	p1_r.visible = true
 	speak_timer.start(SPEAK_TIME)
+	print("speak")
 	
 func _on_SpeakTimer_timeout():
-	if times_spoken < 4:
+	if times_spoken < 3:
 		emoji_display()
+		print("times spoken: " + str(times_spoken))
 		times_spoken += 1
 		speak() #recursion
 	else:
-		times_spoken = 0
 		
 		if StateManager.first_half:
 			StateManager.state = StateManager.States.CHOICE
@@ -62,16 +63,17 @@ func _on_SpeakTimer_timeout():
 			get_parent().try_to_end()
 
 func emoji_display():
-	print("display emoji")
-	audio_emoji.play()
-	
-	if StateManager.first_half:
-		options_l.p1.emoji_name = combat_emoji_map_l[times_spoken - 1]
-		options_l.p1.visible = true
-		options_r.p1.emoji_name = combat_emoji_map_r[times_spoken - 1]
-		options_r.p1.visible = true
-	else:
-		options_l.p1.emoji_name = combat_emoji_map_l_2[times_spoken - 1]
-		options_l.p1.visible = true
-		options_r.p1.emoji_name = combat_emoji_map_r_2[times_spoken - 1]
-		options_r.p1.visible = true
+	if StateManager.state == StateManager.States.BATTLE:
+		print("display emoji")
+		audio_emoji.play()
+		
+		if StateManager.first_half:
+			options_l.p1.emoji_name = combat_emoji_map_l[times_spoken]
+			options_l.p1.visible = true
+			options_r.p1.emoji_name = combat_emoji_map_r[times_spoken]
+			options_r.p1.visible = true
+		else:
+			options_l.p1.emoji_name = combat_emoji_map_l_2[times_spoken]
+			options_l.p1.visible = true
+			options_r.p1.emoji_name = combat_emoji_map_r_2[times_spoken]
+			options_r.p1.visible = true
