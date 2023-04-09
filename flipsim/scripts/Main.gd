@@ -60,12 +60,6 @@ func _ready():
 	play_animations()
 	randomize()
 	
-#quit game
-func _input(event):
-	if event.is_action_pressed("p"):
-		get_tree().quit()
-		
-
 func _process(_delta):
 	if StateManager.state == StateManager.States.IDLE:
 		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("B") || Input.is_action_just_pressed("A") || Input.is_action_just_pressed("C"):
@@ -78,13 +72,13 @@ func _process(_delta):
 		answer_l.visible = true
 #		answer_r.visible = true #TODO
 		
-		if Input.is_action_just_pressed("ui_accept") || Input.is_action_just_pressed("A"):
+		if Input.is_action_just_pressed("A"):
 			audio_interface_beep.play()
 			choose("A")
-		if Input.is_action_just_pressed("ui_select") || Input.is_action_just_pressed("B"):
+		if Input.is_action_just_pressed("B"):
 			audio_interface_beep.play()
 			choose("B")
-		if Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("C"):
+		if Input.is_action_just_pressed("C"):
 			audio_interface_beep.play()
 			choose("C")
 	else:
