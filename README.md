@@ -1,8 +1,7 @@
 # Lutadores de Rua
 
-## Itch
-
-https://jvfzago.itch.io/lutadores-de-rua
+Jogo feito em 48h para a Fliper Jam da CPBSB5 (Campus Party Brasília 2023), para ser jogado em um fliperama físico montado na hora!  
+Jogue aqui: https://jvfzago.itch.io/lutadores-de-rua
 
 ## TODO
 
